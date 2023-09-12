@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h1>Uloguj se</h1>
+      <div class="form-group">
+        <label class="col-md-4">E-mail</label>
+        <input type="text" class="form-control" [(ngModel)]="email" />
+
+        <label class="col-md-4">Password</label>
+        <input type="text" class="form-control" [(ngModel)]="password" />
+        <br />
+        <button class="btn btn-primary" (click)="tryLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+</div>

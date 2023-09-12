@@ -1,0 +1,144 @@
+<app-navigation-bar></app-navigation-bar>
+
+<div class="container">
+    <div class="row">
+      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12-col-xs-12">
+        <div class="card">
+            <div class="card-body">
+                Kreiranje korisnika:
+                <div class="container">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="form-group">
+                          <label class="col-md-4">Ime:</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [(ngModel)]="user.FirstName"
+                          />
+
+                          <label class="col-md-4">Prezime:</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [(ngModel)]="user.LastName"
+                          />
+                          
+                  
+                          <label class="col-md-4">Email:</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [(ngModel)]="user.Email"
+                            [disabled]="user.EditMode"
+                          />
+                  
+                          <label class="col-md-4" *ngIf="!user.EditMode">Password:</label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            [(ngModel)]="user.Password"
+                            *ngIf="!user.EditMode"
+                          />
+
+                          <label class="col-md-4" *ngIf="user.EditMode">Novi password:</label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            [(ngModel)]="userNewPassword"
+                            *ngIf="user.EditMode"
+                          />
+                  
+                          <label class="col-md-4">Role:</label>
+                          <br />
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Svrha</th>
+                                <th scope="col">Akcija</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td> <b>Type1:</b> Pristup stranama početak i geoportal </td>
+                                <td> <input type="checkbox" class="checkbox" [(ngModel)]="Type1"/> </td>
+                              </tr>
+                              <tr>
+                                <td> <b>Type2:</b> Pristup stranama početak, geoportal i unos  </td>
+                                <td> <input type="checkbox" class="checkbox" [(ngModel)]="Type2"/> </td>
+                              </tr>
+                              <tr>
+                                <td> <b>Type3:</b> Pristup stranama početak, geoportal, unos i administracija </td>
+                                <td> <input type="checkbox" class="checkbox" [(ngModel)]="Type3"/> </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <button (click)="InsertUpdate()" class="btn btn-primary">
+                            <span *ngIf="user.EditMode==true">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                              </svg>
+                              Izmijeni</span>
+                            <span *ngIf="user.EditMode==false">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                              </svg>
+                            </span>
+                            
+                          </button>
+                          <button (click)="Cancel()" class="btn btn-primary" style="margin-left: 2px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12-col-xs-12">
+        <div class="card">
+            <div class="card-body">
+                Korisnici:
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">E-mail:</th>
+                        <th scope="col">Ime i prezime:</th>
+                        <th scope="col">Role:</th>
+                        <th scope="col">Akcija:</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let user of users ">
+                        <th scope="row">{{user.userName}}</th>
+                        <td>{{user.firstName}} {{user.lastName}}</td>
+                        <td>
+                          <span *ngFor="let role of usersRoles">
+                            <span *ngIf="user.id==role.userId">{{role.role}}, </span>
+                          </span> 
+                      </td>
+                        <td> 
+                          <button class="btn btn-danger" (click)="Delete(user.id)" style="margin-right: 2px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                          </button> 
+                          <button class="btn btn-primary" (click)="Edit(user)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-gear" viewBox="0 0 16 16">
+                              <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Zm9.886-3.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
+                            </svg>
+                          </button> 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
